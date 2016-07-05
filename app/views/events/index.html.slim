@@ -1,29 +1,36 @@
-h1 Events calendar
+#week-calendar
+  h1 Events calendar
 
-= link_to 'Create event'
+  = link_to 'Create event'
 
-#event-form
-  = simple_form_for @new_event do |f|
-    = f.input :start_date
-    = f.input :end_date
-    = f.input :description
+  #event-form
+    = simple_form_for @new_event do |f|
+      .input-group
+        = f.input :start_date
+      .input-group
+        = f.input :end_date
+      .input-group
+        = f.input :description
 
-    = f.submit
+      = f.submit
 
-- if @events_by_day.present?
-  .week-calendar
-  - @week_start.upto(@week_end) do |day|
-    .day
-      .heading
-        .wday
-          = day.strftime("%A")
-        .mday
-          = "#{day.day.ordinalize} #{day.strftime("%b")}"
-      .content
-        - @events_by_day[day].each do |event|
-          .event[class="span#{event.days_in_week}"]
-            .description
-              = event.description
-
-= image_tag 'events_calendar', width: '100%'
-
+  - if @events_by_day.present?
+    - previous = []
+    .week-calendar
+      - @week_start.upto(@week_end) do |day|
+        .day
+          .heading
+            .wday
+              = day.strftime("%A")
+            .mday
+              = "#{day.day.ordinalize} #{day.strftime("%b")}"
+          .content
+            - previous.reject!{ |ev| ev.end_date < day }
+            - previous.each do |prev|
+              .event-span
+            - @events_by_day[day].each do |event|
+              - previous << event
+              .event-wrapper[class="span#{event.days_in_week}"]
+                .event
+                  .description
+                    = event.description

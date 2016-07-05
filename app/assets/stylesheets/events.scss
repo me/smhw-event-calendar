@@ -1,3 +1,97 @@
-// Place all the styles related to the events controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bourbon";
+
+$calendar-color: #C1C6D0;
+$event-color: #F09100;
+
+body {
+  display: flex;
+}
+
+#week-calendar {
+  padding: 1em;
+  width: 100%;
+}
+
+#event-form {
+  .input-group {
+    @include clearfix();
+    padding: 0.5em;
+
+    label {
+      width: 8em;
+      display: block;
+      float: left;
+    }
+    input, textarea {
+      float: left;
+    }
+    textarea {
+      width: 20em;
+    }
+    .error {
+      display: block;
+      color: #EE0000;
+      margin-top: 0.5em;
+    }
+  }
+}
+
+.week-calendar {
+  @include align-items(stretch);
+  @include display(flex);
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  border: 1px solid $calendar-color;
+  margin-top: 2em;
+
+  .day {
+    @include flex(1);
+    border-color: $calendar-color;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    min-height: 10em;
+
+    &:last-child {
+      border-width: 0;
+    }
+
+    .heading {
+      text-align: center;
+      border-bottom: 1px solid $calendar-color;
+      color: #525965;
+      padding: 0.5em 0;
+      font-size: 0.9em;
+
+      .wday {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .event {
+    background-color: $event-color;
+    margin: 0.5em;
+    padding: 1em;
+    height: 2em;
+    border-radius: 3px;
+    border: 1px solid #888888;
+    z-index: 2;
+    position: relative;
+  }
+
+  .event-span {
+    position: relative;
+    height: 4em;
+    margin: 0.5em;
+  }
+
+  .event-wrapper {
+    &.span1 { width: 100%; }
+    &.span2 { width: 200%; }
+    &.span3 { width: 300%; }
+    &.span4 { width: 400%; }
+    &.span5 { width: 500%; }
+    &.span6 { width: 600%; }
+    &.span7 { width: 700%; }
+  }
+}

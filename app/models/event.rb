@@ -9,6 +9,6 @@ class Event < ActiveRecord::Base
   def days_in_week(week_start=start_date_week)
     week_end = week_start + 6
     start = [start_date, week_start].max
-    [week_end, end_date].min - start + 1
+    ([week_end, end_date].min - start + 1).to_i
   end
 end
