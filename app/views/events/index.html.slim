@@ -1,0 +1,20 @@
+h1 Events calendar
+
+= link_to 'Create event'
+
+.week-calendar
+- @week_start.upto(@week_end) do |day|
+  .day
+    .heading
+      .wday
+        = day.strftime("%A")
+      .mday
+        = "#{day.day.ordinalize} #{day.strftime("%b")}"
+    .content
+      - @events_by_day[day].each do |event|
+        .event[class="span#{event.days_in_week}"]
+          .description
+            = event.description
+
+= image_tag 'events_calendar', width: '100%'
+

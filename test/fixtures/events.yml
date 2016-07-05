@@ -14,3 +14,8 @@ two:
   start_date: 2016-01-01
   end_date: 2016-01-03
   description: Test Two
+
+multiweek:
+  start_date: 2016-01-02
+  end_date: 2016-01-30
+  description: Multiweek

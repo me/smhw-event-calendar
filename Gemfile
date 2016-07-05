@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Adds ActiveModel validations for dates. See https://github.com/codegram/date_validator
 gem 'date_validator'
+# A templating engine
+gem 'slim'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
