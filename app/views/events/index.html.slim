@@ -1,36 +1,35 @@
-#week-calendar
+#week-calendar[data-week=@week_start]
   h1 Events calendar
 
-  = link_to 'Create event'
+  = link_to "Create event", "#", id: "add-event-link"
 
-  #event-form
-    = simple_form_for @new_event do |f|
-      .input-group
-        = f.input :start_date
-      .input-group
-        = f.input :end_date
-      .input-group
-        = f.input :description
+  = render partial: 'form'
 
-      = f.submit
-
-  - if @events_by_day.present?
-    - previous = []
+  - if @events_by_day != nil
+    - slots = []
     .week-calendar
       - @week_start.upto(@week_end) do |day|
-        .day
+        .day[class=(day == Date.today ? 'current' : nil)]
           .heading
             .wday
               = day.strftime("%A")
             .mday
               = "#{day.day.ordinalize} #{day.strftime("%b")}"
           .content
-            - previous.reject!{ |ev| ev.end_date < day }
-            - previous.each do |prev|
-              .event-span
+            - slot = 0
+            - slots.each_index { |i| slots[i] = nil if slots[i] && slots[i].end_date < day }
             - @events_by_day[day].each do |event|
-              - previous << event
-              .event-wrapper[class="span#{event.days_in_week}"]
+              - while slots[slot]
+               - slot += 1
+               .event-span
+              - slots[slot] = event
+              - slot += 1
+              .event-wrapper[class="span#{event.days_in_week(@week_start)}" data-days=event.days_in_week(@week_start)]
                 .event
                   .description
                     = event.description
+
+    .prev
+      a href="?week=#{@week_start-7}" Previous
+    .next
+      a href="?week=#{@week_end+1}" Next

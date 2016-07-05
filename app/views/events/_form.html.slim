@@ -1,0 +1,10 @@
+#event-form
+  = simple_form_for @new_event do |f|
+    .input-group
+      = f.input :start_date
+    .input-group
+      = f.input :end_date
+    .input-group
+      = f.input :description
+
+    = f.submit

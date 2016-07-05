@@ -39,7 +39,11 @@ gem 'simple_form'
 # gem 'capistrano-rails', group: :development
 
 group :assets, :development do
+  gem 'sprockets-es6'
+  # SCSS utilities
   gem 'bourbon'
+  # Page-specific javascript
+  gem 'paloma'
 end
 
 group :development, :test do

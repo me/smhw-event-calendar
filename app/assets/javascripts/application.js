@@ -13,4 +13,25 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require paloma
 //= require_tree .
+
+'use strict';
+
+Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf());
+    dat.setDate(dat.getDate() + days);
+    return dat;
+};
+
+Date.prototype.daysDiff = function(other) {
+  return Math.round((this - other)/(1000*60*60*24));
+};
+
+
+/*global Paloma */
+
+$(document).on('page:load', function(){
+   Paloma.executeHook();
+   Paloma.engine.start();
+});

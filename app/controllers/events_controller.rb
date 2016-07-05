@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     @week_start = day.beginning_of_week
     @week_end = @week_start + 6
     events = Event.where(
-      "start_date < ? and end_date > ?", @week_end, @week_start
+      "start_date <= ? and end_date >= ?", @week_end, @week_start
     )
     @events_by_day = Hash.new(){ |h, k| h[k] = [] }
     events.each do |event|
@@ -25,10 +25,12 @@ class EventsController < ApplicationController
     if @new_event.valid?
       respond_to do |format|
         format.html { redirect_to action: :index, week: start_date.beginning_of_week }
+        format.js { render json: @new_event }
       end
     else
       respond_to do |format|
         format.html { render 'index' }
+        format.js { render json: {errors: @new_event.errors }}
       end
     end
   end
