@@ -53,11 +53,4 @@ class EventsControllerTest < ActionController::TestCase
     assert_equal 1, assigns(:new_event).errors[:end_date].length
   end
 
-  private
-
-  def date_params(name, date)
-    d = Date.parse(date)
-    {"#{name}(1i)" => d.year, "#{name}(2i)" => d.month, "#{name}(3i)" => d.day}
-  end
-
 end

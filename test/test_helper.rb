@@ -7,4 +7,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def date_params(name, date)
+    d = Date.parse(date)
+    {"#{name}(1i)" => d.year, "#{name}(2i)" => d.month, "#{name}(3i)" => d.day}
+  end
 end

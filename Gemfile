@@ -38,7 +38,7 @@ gem 'simple_form'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :assets, :development do
+group :assets, :development, :test do
   gem 'sprockets-es6'
   # SCSS utilities
   gem 'bourbon'
